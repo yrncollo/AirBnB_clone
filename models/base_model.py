@@ -31,3 +31,10 @@ class BaseModel:
         self.updated_at = datetime.now()
         models.storage.save()
 
+    def to_dict(self):
+        """returns dictionary representation of BaseModel class"""
+        inst = dict(self.__dict__)
+        inst["created_at"] = self.created_at.isoformat(timespec='microseconds')
+        inst["updated_at"] = self.updated_at.isoformat(timespec='microseconds')
+        inst["__class__"] = self.__class__.__name__
+        return inst
