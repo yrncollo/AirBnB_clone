@@ -91,3 +91,24 @@ class TestUser_to_dict(unittest.TestCase):
         self.assertIn("updated_at", us.to_dict())
         self.assertIn("__class__", us.to_dict())
 
+    def test_to_dict_output(self):
+        dt = datetime.today()
+        us = User()
+        us.id = "123456"
+        us.created_at = us.updated_at = dt
+        tdict = {
+            'id': '123456',
+            '__class__': 'User',
+            'created_at': dt.isoformat(),
+            'updated_at': dt.isoformat(),
+        }
+        self.assertDictEqual(us.to_dict(), tdict)
+
+    def test_contrast_to_dict_dunder_dict(self):
+        us = User()
+        self.assertNotEqual(us.to_dict(), us.__dict__)
+
+    def test_to_dict_with_arg(self):
+        us = User()
+        with self.assertRaises(TypeError):
+            us.to_dict(None)
