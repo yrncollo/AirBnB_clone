@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-"""base model module"""
+""" base_model module """
+
 import uuid
 from datetime import datetime
 import models
 
 
 class BaseModel:
-    """This class is used as the base model"""
+    """ class to be used as the base class for other nodels in th project"""
     def __init__(self, *args, **kwargs):
         """initializes all instances of the BaseModel class"""
         if kwargs:
@@ -19,11 +20,15 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
-        """should print: [<class name>] (<self.id>) <self.__dict__>"""
+        """String representation of the BaseModel class"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
-        models.storage.new(self)
+
+    def __repr__(self):
+        """String representation of the BaseModel class"""
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """updates the public instance attribute updated_at with the
@@ -42,4 +47,3 @@ class BaseModel:
     def delete(self):
         """ delete the current instance from storage """
         models.storage.delete(self)
-
