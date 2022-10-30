@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-""" This is a module that has file storage"""
+"""
+module that supplies the class FileStorage
+"""
 
 import json
 import models
@@ -7,8 +9,8 @@ import models
 
 class FileStorage:
     """
-    class FileStorage that serializes instances to a JSON file and deserializes
-    JSON file to instances
+    class that serializes instances to a JSON file and deserializes JSON file
+    to instances
     it stores objects in a file in a json format
 
     **Class Attributes**
