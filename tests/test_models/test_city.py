@@ -46,3 +46,41 @@ class TestCityDocs(unittest.TestCase):
         """Tests for the City class docstring"""
         self.assertTrue(len(City.__doc__) >= 1)
 
+
+class TestCity(unittest.TestCase):
+    '''
+        Testing City class
+    '''
+
+    def setUp(self):
+        """ seting up BaseModel instance to be used for tests """
+        self.test_city = City()
+        self.test_city.name = "Karachi"
+
+    def TearDown(self):
+        """Remove an instance of the class"""
+        del self.test_city
+
+    def test_city_inheritance(self):
+        '''
+            tests that the City class Inherits from BaseModel
+        '''
+        self.assertIsInstance(self.test_city, base_model)
+
+    def test_city_attributes(self):
+        self.assertTrue("state_id" in self.test_city.__dir__())
+        self.assertTrue("name" in self.test_city.__dir__())
+
+    def test_type_name(self):
+        '''
+            Test the type of name
+        '''
+        name = getattr(self.test_city, "name")
+        self.assertIsInstance(name, str)
+
+    def test_type_state_id(self):
+        '''
+            Test the type of attribute state_id
+        '''
+        name = getattr(self.test_city, "state_id")
+        self.assertIsInstance(name, str)
