@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """base model module"""
-
 import uuid
 from datetime import datetime
 import models
+
 
 class BaseModel:
     """This class is used as the base model"""
@@ -23,7 +23,7 @@ class BaseModel:
     def __str__(self):
         """should print: [<class name>] (<self.id>) <self.__dict__>"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
-            models.storage.new(self)
+        models.storage.new(self)
 
     def save(self):
         """updates the public instance attribute updated_at with the
@@ -38,3 +38,8 @@ class BaseModel:
         inst["updated_at"] = self.updated_at.isoformat(timespec='microseconds')
         inst["__class__"] = self.__class__.__name__
         return inst
+
+    def delete(self):
+        """ delete the current instance from storage """
+        models.storage.delete(self)
+
