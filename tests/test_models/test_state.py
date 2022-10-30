@@ -53,3 +53,36 @@ class TestStateDocs(unittest.TestCase):
         """
         for func in self.base_func:
             self.assertTrue(len(func[1].__doc__) >= 1)
+
+
+class TestState(unittest.TestCase):
+    """
+    Testing State class
+    """
+
+    def setUp(self):
+        """ seting up BaseModel instance to be used for tests """
+        self.test_state = State()
+
+    def TearDown(self):
+        """Remove an instance of the class"""
+        del self.test_state
+
+    def test_state_inheritence(self):
+        '''
+            Test that State class inherits from BaseModel.
+        '''
+        self.assertIsInstance(self.test_state, BaseModel)
+
+    def test_state_attributes(self):
+        '''
+            Test that State class contains the attribute name.
+        '''
+        self.assertTrue("name" in self.test_state.__dir__())
+
+    def test_state_attributes_type(self):
+        '''
+            Test that State class attribute name is class type str.
+        '''
+        name = getattr(self.test_state, "name")
+        self.assertIsInstance(name, str)
